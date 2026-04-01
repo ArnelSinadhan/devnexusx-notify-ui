@@ -1,18 +1,18 @@
 // ─── Toast Types ───────────────────────────────────────────────
 
-export type ToastType = 'success' | 'error' | 'warning' | 'info';
+export type ToastType = "success" | "error" | "warning" | "info";
 
 export type ToastPosition =
-  | 'top-right'
-  | 'top-left'
-  | 'top-center'
-  | 'bottom-right'
-  | 'bottom-left'
-  | 'bottom-center';
+  | "top-right"
+  | "top-left"
+  | "top-center"
+  | "bottom-right"
+  | "bottom-left"
+  | "bottom-center";
 
-export type ToastAnimation = 'fade' | 'slide' | 'bounce';
+export type ToastAnimation = "fade" | "slide" | "bounce";
 
-export type Theme = 'light' | 'dark' | 'auto';
+export type Theme = "light" | "dark" | "auto";
 
 export interface ToastOptions {
   /** Message to display */
@@ -39,13 +39,28 @@ export interface ToastOptions {
   dismissible?: boolean;
   /** Show a progress bar for auto-dismiss. Default: true */
   progressBar?: boolean;
+  /** Custom icon: HTML string, emoji string, or false to hide. Default: built-in SVG per type */
+  icon?: string | false;
 }
 
-export interface ResolvedToastOptions extends Required<Pick<ToastOptions, 'message' | 'type' | 'duration' | 'position' | 'animation' | 'theme' | 'dismissible' | 'progressBar'>> {
+export interface ResolvedToastOptions extends Required<
+  Pick<
+    ToastOptions,
+    | "message"
+    | "type"
+    | "duration"
+    | "position"
+    | "animation"
+    | "theme"
+    | "dismissible"
+    | "progressBar"
+  >
+> {
   html?: string;
   onDismiss?: (id: string) => void;
   onClick?: (id: string) => void;
   className?: string;
+  icon?: string | false;
 }
 
 export interface ToastInstance {
@@ -57,7 +72,7 @@ export interface ToastInstance {
 
 // ─── Modal Types ───────────────────────────────────────────────
 
-export type ModalVariant = 'confirm' | 'alert' | 'success';
+export type ModalVariant = "confirm" | "alert" | "success";
 
 export interface ModalOptions {
   /** Modal heading */
@@ -78,6 +93,8 @@ export interface ModalOptions {
   className?: string;
   /** Render custom HTML inside the modal body */
   html?: string;
+  /** Custom icon: HTML string, emoji string, or false to hide. Default: built-in SVG per variant */
+  icon?: string | false;
 }
 
 export interface ModalResult {

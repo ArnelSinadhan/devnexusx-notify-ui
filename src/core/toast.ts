@@ -154,12 +154,16 @@ function renderToast(inst: ToastInstance): void {
   });
 
   // Icon
-  const iconEl = createElement(
-    "span",
-    { class: "nui-toast-icon", "aria-hidden": "true" },
-    icons[options.type],
-  );
-  el.appendChild(iconEl);
+  if (options.icon !== false) {
+    const iconHtml =
+      typeof options.icon === "string" ? options.icon : icons[options.type];
+    const iconEl = createElement(
+      "span",
+      { class: "nui-toast-icon", "aria-hidden": "true" },
+      iconHtml,
+    );
+    el.appendChild(iconEl);
+  }
 
   // Body
   const body = createElement("div", { class: "nui-toast-body" });
