@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>notify-ui CDN Demo</title>
+  <style>
+    body { font-family: system-ui; padding: 40px; }
+    button { padding: 8px 16px; border-radius: 6px; border: 1px solid #ddd; cursor: pointer; margin: 4px; }
+  </style>
+</head>
+<body>
+
+  <h1>notify-ui Demo</h1>
+  <div>
+    <button onclick="NotifyUI.showSuccess('Saved!')">Success</button>
+    <button onclick="NotifyUI.showError('Something went wrong')">Error</button>
+    <button onclick="NotifyUI.showWarning('Careful!')">Warning</button>
+    <button onclick="NotifyUI.showInfo('Heads up')">Info</button>
+    <button onclick="handleConfirm()">Confirm Dialog</button>
+    <button onclick="NotifyUI.dismissAll()">Dismiss All</button>
+  </div>
+
+  <!-- After publishing: use unpkg or jsdelivr -->
+  <!-- <script src="https://unpkg.com/notify-ui"></script> -->
+  <script type="module">
+    // Local dev — import from the built package
+    import * as NotifyUI from '../dist/index.js';
+
+    // Expose globally for onclick handlers
+    window.NotifyUI = NotifyUI;
+
+    // Configure defaults
+    NotifyUI.configure({
+      position: 'top-right',
+      theme: 'light',
+      maxVisible: 5,
+    });
+
+    window.handleConfirm = async () => {
+      const yes = await NotifyUI.confirm({
+        message: 'Do you want to proceed?',
+        title: 'Confirmation',
+      });
+      if (yes) NotifyUI.showSuccess('Confirmed!');
+      else NotifyUI.showInfo('Cancelled');
+    };
+  </script>
+
+</body>
+</html>
