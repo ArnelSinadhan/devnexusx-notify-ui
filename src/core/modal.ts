@@ -59,18 +59,25 @@ export function modal(opts: ModalOptions): Promise<ModalResult> {
     });
 
     // Icon
-    const iconKey =
-      variant === "confirm"
-        ? "confirm"
-        : variant === "alert"
-          ? "alert"
-          : "success";
-    const iconWrapper = createElement(
-      "div",
-      { class: `nui-modal-icon nui-variant-${variant}`, "aria-hidden": "true" },
-      icons[iconKey],
-    );
-    card.appendChild(iconWrapper);
+    if (merged.icon !== false) {
+      const iconKey =
+        variant === "confirm"
+          ? "confirm"
+          : variant === "alert"
+            ? "alert"
+            : "success";
+      const iconHtml =
+        typeof merged.icon === "string" ? merged.icon : icons[iconKey];
+      const iconWrapper = createElement(
+        "div",
+        {
+          class: `nui-modal-icon nui-variant-${variant}`,
+          "aria-hidden": "true",
+        },
+        iconHtml,
+      );
+      card.appendChild(iconWrapper);
+    }
 
     // Title
     if (merged.title) {
